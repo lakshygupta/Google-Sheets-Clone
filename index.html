@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <link rel="icon" type="image/x-icon" href="/images/favicon3.ico">
-    <title>Google Sheets</title>
+    <title>Untitled spreadsheet - Google Sheets</title>
 </head>
 <body>
     <div class="container">
@@ -31,7 +31,7 @@
             </div>
             <div class="docs-header">
                 <div class="title-bar">
-                   <span contenteditable="true" spellcheck="false">Untitled spreadsheet</span>
+                   <span class="spreadsheetname" contenteditable="true" spellcheck="false">Untitled spreadsheet</span>
                     <div class="title-icon"> <img src="./images/star.png" height="20" width="20"> </div>
                     <div class="title-icon"> <img src="./images/folder_move_outline.png" height="20" width="20"> </div>
                     <div class="title-icon"> <img  src="./images/cloud_done.png" height="20" width="20"> </div>
@@ -96,11 +96,11 @@
             </select>
             <div class="vertical-line-seperator"></div>
 
-            <div class="material-symbols-outlined menu-icon md-21">format_bold</div>
-            <div class="material-symbols-outlined menu-icon md-21 ">format_italic</div>
-            <div class="material-symbols-outlined menu-icon md-21 ">format_underlined</div>
-            <div class="material-symbols-outlined menu-icon md-21 ">strikethrough_s</div>
-            <div class="material-symbols-outlined menu-icon md-21 ">format_color_text</div>
+            <div class="material-symbols-outlined menu-icon md-21 style-icons">format_bold</div>
+            <div class="material-symbols-outlined menu-icon md-21 style-icons">format_italic</div>
+            <div class="material-symbols-outlined menu-icon md-21 style-icons">format_underlined</div>
+            <div class="material-symbols-outlined menu-icon md-21 style-icons">strikethrough_s</div>
+            <div class="material-symbols-outlined menu-icon md-21 style-icons">format_color_text</div>
             <div class="vertical-line-seperator"></div>
 
             
@@ -110,17 +110,22 @@
             <div class="material-symbols-outlined menu-icon md-21 ">content_paste</div>
             <div class="vertical-line-seperator"></div>
 
-            <div class="material-symbols-outlined menu-icon md-21 ">format_align_left</div>
-            <div class="material-symbols-outlined menu-icon md-21 ">format_align_center</div>
-            <div class="material-symbols-outlined menu-icon md-21 ">format_align_right</div>
+            <div class="material-symbols-outlined menu-icon md-21 alignment-icon selected">format_align_left</div>
+            <div class="material-symbols-outlined menu-icon md-21 alignment-icon">format_align_center</div>
+            <div class="material-symbols-outlined menu-icon md-21 alignment-icon">format_align_right</div>
             <div class="vertical-line-seperator"></div>
             
          </div>
         
         <div class="formula-bar">
-            <div class="formula-editor selected-cell"></div>
-            <div class="function-sign"></div>
-            <div class="formula-editor formula-input"></div>
+            <div class="formula-editor selected-cell">
+                <span class="selected-cell-text">B1</span>
+                <div class="material-symbols-outlined selected-cell-down md-21 ">arrow_drop_down</div>
+            </div>
+            <div class="vertical-line-seperator"></div>
+            <div class="material-symbols-outlined function-sign">function</div>
+            <!-- <div class=""></div> -->
+            <div class="formula-editor formula-input" contenteditable="true" spellcheck="false"></div>
         </div>
         <div class="data-container">
             <div class="select-all"></div>

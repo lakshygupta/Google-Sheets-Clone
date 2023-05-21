@@ -1,6 +1,7 @@
 $(document).ready(function () {
+  var contents = $(".spreadsheetname").html();
   let cellContainer = $(".input-cell-container");
-  for (let i = 1; i <= 200; i++) {
+  for (let i = 1; i <= 100; i++) {
     let ans = "";
 
     let n = i;
@@ -22,15 +23,54 @@ $(document).ready(function () {
     $(".row-name-container").append(row);
   }
 
-  for (let i = 1; i <= 200; i++) {
+  for (let i = 1; i <= 100; i++) {
     let myrow = $(`<div class="cell-row"></div>`);
-    for (let j = 1; j <= 200; j++) {
+    for (let j = 1; j <= 100; j++) {
       let colCode = $(`.colId-${j}`).attr("id").split("-")[1];
       let mycol = $(
-        `<div class="input-cell" id="row-${i}-col-${j}" data="code-${colCode}" contenteditable="true" spellcheck="false"></div>`
+        `<div class="input-cell" id="row-${i}-col-${j}" data="code-${colCode}" contenteditable="false" spellcheck="false"></div>`
       );
       myrow.append(mycol);
     }
     $(".input-cell-container").append(myrow);
   }
+
+  $(".alignment-icon").click(function () {
+    $(".alignment-icon.selected").removeClass("selected");
+    $(this).addClass("selected");
+  });
+
+  $(".style-icons").click(function () {
+    $(this).toggleClass("selected");
+  });
+
+  $(".input-cell").click(function () {
+    $(".input-cell.selected").removeClass("selected");
+    $(this).addClass("selected");
+  });
+
+  $(".input-cell").dblclick(function () {
+    $(".input-cell.selected").removeClass("selected");
+    $(this).addClass("selected");
+    $(this).attr("contenteditable", "true");
+    $(this).focus();
+  });
+
+  $(".input-cell-container").scroll(function () {
+    $(".column-name-container").scrollLeft(this.scrollLeft);
+    $(".row-name-container").scrollTop(this.scrollTop);
+  });
+
+  $(".input-cell").click(function () {
+    var rowNum = $(this).attr("id").split("-")[1];
+    var colNum = $(this).attr("data").split("-")[1];
+    $(".selected-cell-text").html(colNum + "" + rowNum);
+  });
+
+  $(".spreadsheetname").blur(function () {
+    if (contents != $(this).html()) {
+      $(document).prop("title", $(this).html() + " - Google Sheets");
+      contents = $(this).html();
+    }
+  });
 });

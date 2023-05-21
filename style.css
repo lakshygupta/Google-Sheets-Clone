@@ -18,7 +18,7 @@ body{
 }
 
 *:focus {
-    outline: none;
+    /* outline: none; */
   }
 
 .container{
@@ -32,6 +32,10 @@ body{
     justify-content: left;
     padding: 15px;
     background-color: #F9FBFD;
+}
+
+#spreadsheetname{
+    outline: none;
 }
 
 .docs-logo{
@@ -146,8 +150,9 @@ body{
     display: flex !important;
     align-items: center;
     height: 80%;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left: 3px;
 }
 
 
@@ -195,6 +200,57 @@ body{
 
 .formula-bar {
     height: 5vh;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.formula-editor{
+    height: 70%;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-left: 0.2rem;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid lightgray; */
+}
+
+.formula-editor.selected-cell{
+    width: 110px;
+    color: #444746;
+    font-size: 14px;
+    padding-left: 0.8rem;
+    display: flex !important;
+    align-items: center;
+}
+
+.selected-cell-text{
+
+}
+
+.selected-cell-down{
+    margin-left: auto;
+}
+
+.formula-editor.selected-cell:hover{
+    background-color: #EDEDED;
+    cursor: text;
+    border-radius: 5px;
+}
+
+.function-sign{
+    /* width: 40px; */
+    display: flex;
+    align-items: center;
+    font-size: 22px !important; 
+    color: #989A99;
+}
+
+.formula-input{
+    width: calc(100vw - 160px);
+    outline: none;
+    color: #444746;
+    font-size: 15px;
 }
 
 .data-container {
@@ -216,6 +272,7 @@ body{
     display: flex;
     color: #44484a;
     font-size: 12px;
+    overflow: hidden;
 }
 
 .row-name-container{
@@ -236,7 +293,7 @@ body{
 }
 
 .row-name{
-    min-height: 22px;
+    min-height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -249,15 +306,25 @@ body{
 
 .input-cell{
     min-width: 100px;
-    min-height: 22px;
+    min-height: 24px;
     border-bottom: 1px solid #dedede;
     border-right: 1px solid #dedede;
+    display: flex;
+    align-items: center;
+    padding-left: 3px;
+
+}
+
+.input-cell.selected{
+    border: 2px solid #1A73E8;
+    outline: 2px solid #d3e3fd;
 }
 
 .input-cell-container{
     width: calc(100vw - 46px);
     height: calc(74vh - 24px);
     border: 1px solid #CBCBCB;
+    overflow: scroll;
 }
 
 .scroller {
@@ -325,4 +392,18 @@ body{
     background-color: #d4d6d9;
     width: auto;
     cursor: pointer;
+}
+
+.alignment-icon.selected{
+    background-color: #d3e3fd;
+    border-radius: 5px;
+    color: black;
+    font-weight: 560;
+}
+
+.style-icons.selected{
+    background-color: #d3e3fd;
+    border-radius: 5px;
+    color: black;
+    font-weight: 560;
 }
