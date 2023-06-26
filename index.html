@@ -85,6 +85,7 @@
                 <option style="font-family:Palatino" value="Palatino">Palatino</option>
                 <option style="font-family:'Times New Roman'" value="roman">Times New Roman</option>
                 <option style="font-family:Verdana" value="Verdana">Verdana</option>
+                <option style="font-family:Google Sans" value="Google Sans">Sans</option>
             </select>
             <div class="vertical-line-seperator"></div>
 
@@ -101,19 +102,25 @@
             <div class="material-symbols-outlined menu-icon md-21 style-icons icon-italic">format_italic</div>
             <div class="material-symbols-outlined menu-icon md-21 style-icons icon-underline">format_underlined</div>
             <div class="material-symbols-outlined menu-icon md-21 style-icons icon-strike">strikethrough_s</div>
-            <div class="material-symbols-outlined menu-icon md-21 style-icons icon-format-color">format_color_text</div>
+            <div class="menu-icon icon-format-color">
+                <input type="color" style='opacity:0;width:28px;position:absolute;'/>
+                <div class="material-symbols-outlined md-text-color-picker-21 ">format_color_text</div>
+            </div>
             <div class="vertical-line-seperator"></div>
 
-            
-            <div class="material-symbols-outlined menu-icon md-21 ">format_color_fill</div>
+            <div class="menu-icon icon-color-fill">
+                <input type="color" style='opacity:0;width:28px;position:absolute;'/>
+                <div class="material-symbols-outlined md-color-picker-21">format_color_fill</div>
+            </div>
+
             <div class="material-symbols-outlined menu-icon md-21 ">content_cut</div>
             <div class="material-symbols-outlined menu-icon md-21 ">content_copy</div>
             <div class="material-symbols-outlined menu-icon md-21 ">content_paste</div>
             <div class="vertical-line-seperator"></div>
 
-            <div class="material-symbols-outlined menu-icon md-21 alignment-icon selected">format_align_left</div>
-            <div class="material-symbols-outlined menu-icon md-21 alignment-icon">format_align_center</div>
-            <div class="material-symbols-outlined menu-icon md-21 alignment-icon">format_align_right</div>
+            <div class="material-symbols-outlined menu-icon md-21 alignment-icon icon-align-left selected">format_align_left</div>
+            <div class="material-symbols-outlined menu-icon md-21 alignment-icon icon-align-center">format_align_center</div>
+            <div class="material-symbols-outlined menu-icon md-21 alignment-icon icon-align-right">format_align_right</div>
             <div class="vertical-line-seperator"></div>
             
          </div>

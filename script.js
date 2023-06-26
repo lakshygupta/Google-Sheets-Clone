@@ -1,3 +1,22 @@
+let defaultProperties = {
+  text: "",
+  "font-weight": "",
+  "font-style": "",
+  "text-decoration": "",
+  "text-align": "left",
+  "background-color": "white",
+  color: "black",
+  "font-family": "Google Sans",
+  "font-size": 14,
+};
+
+let cellData = {
+  Sheet1: {},
+};
+
+let selectedSheet = "Sheet1";
+let totalSheets = 1;
+
 $(document).ready(function () {
   var contents = $(".spreadsheetname").html();
   let cellContainer = $(".input-cell-container");
@@ -86,6 +105,7 @@ $(document).ready(function () {
       ]);
       $(this).addClass("selected");
     }
+    // HEADER CHANGE WITH CELL SELECT
     // bold class add remove
     if ($(this).hasClass("bold-selected")) {
       $(".icon-bold").addClass("selected");
@@ -113,6 +133,9 @@ $(document).ready(function () {
     } else {
       $(".icon-strike").removeClass("selected");
     }
+
+    // align icons
+    changeAlignmentHeader(this);
   });
 
   $(".input-cell").dblclick(function () {
@@ -152,20 +175,54 @@ function getRowCol(thisElement) {
   return [rowId, colId];
 }
 
-function updateCell(property, value) {
+function updateCell(property, value, defaultPossible) {
   $(".input-cell.selected").each(function () {
     $(this).css(property, value);
+    let [rowId, colId] = getRowCol(this);
+    if (cellData[selectedSheet][rowId]) {
+      if (cellData[selectedSheet][rowId][colId]) {
+        cellData[selectedSheet][rowId][colId][property] = value;
+      } else {
+        cellData[selectedSheet][rowId][colId] = { ...defaultProperties };
+        cellData[selectedSheet][rowId][colId][property] = value;
+      }
+    } else {
+      cellData[selectedSheet][rowId] = {};
+      cellData[selectedSheet][rowId][colId] = { ...defaultProperties };
+      cellData[selectedSheet][rowId][colId][property] = value;
+    }
+    if (
+      defaultPossible == true &&
+      JSON.stringify(cellData[selectedSheet][rowId][colId]) === JSON.stringify(defaultProperties)
+    ) {
+      delete cellData[selectedSheet][rowId][colId];
+      if (Object.keys(cellData[selectedSheet][rowId]).length == 0)
+        delete cellData[selectedSheet][rowId];
+    }
   });
+  console.log(cellData);
+}
+
+function changeAlignmentHeader(thisElement) {
+  let [rowId, colId] = getRowCol(thisElement);
+  let cellInfo = defaultProperties;
+  if (cellData[selectedSheet][rowId] && cellData[selectedSheet][rowId][colId]) {
+    cellInfo = cellData[selectedSheet][rowId][colId];
+  }
+  // cellInfo["font-weight"] ? $(".icon-bold").addClass("selected") : $(".icon-bold").removeClass("selected");
+  let alignment = cellInfo["text-align"];
+  $(".alignment-icon.selected").removeClass("selected");
+  $(".icon-align-" + alignment).addClass("selected");
 }
 
 // bold class add remove
 $(".icon-bold").click(function () {
   if ($(this).hasClass("selected")) {
     $(".input-cell.selected").removeClass("bold-selected");
-    updateCell("font-weight", "");
+    updateCell("font-weight", "", true);
   } else {
     $(".input-cell.selected").addClass("bold-selected");
-    updateCell("font-weight", "bold");
+    updateCell("font-weight", "bold", false);
   }
 });
 
@@ -173,10 +230,10 @@ $(".icon-bold").click(function () {
 $(".icon-italic").click(function () {
   if ($(this).hasClass("selected")) {
     $(".input-cell.selected").removeClass("italic-selected");
-    updateCell("font-style", "");
+    updateCell("font-style", "", true);
   } else {
     $(".input-cell.selected").addClass("italic-selected");
-    updateCell("font-style", "italic");
+    updateCell("font-style", "italic", false);
   }
 });
 
@@ -184,10 +241,10 @@ $(".icon-italic").click(function () {
 $(".icon-underline").click(function () {
   if ($(this).hasClass("selected")) {
     $(".input-cell.selected").removeClass("underline-selected");
-    updateCell("text-decoration", "");
+    updateCell("text-decoration", "", true);
   } else {
     $(".input-cell.selected").addClass("underline-selected");
-    updateCell("text-decoration", "underline");
+    updateCell("text-decoration", "underline", false);
     if ($(".input-cell.selected").hasClass("strike-selected")) {
       $(".input-cell.selected").removeClass("strike-selected");
       $(".icon-strike").removeClass("selected");
@@ -199,13 +256,40 @@ $(".icon-underline").click(function () {
 $(".icon-strike").click(function () {
   if ($(this).hasClass("selected")) {
     $(".input-cell.selected").removeClass("strike-selected");
-    updateCell("text-decoration", "");
+    updateCell("text-decoration", "", true);
   } else {
     $(".input-cell.selected").addClass("strike-selected");
-    updateCell("text-decoration", "line-through");
+    updateCell("text-decoration", "line-through", false);
     if ($(".input-cell.selected").hasClass("underline-selected")) {
       $(".input-cell.selected").removeClass("underline-selected");
       $(".icon-underline").removeClass("selected");
     }
   }
+});
+
+// align text
+$(".icon-align-left").click(function () {
+  if (!$(this).hasClass("selected")) {
+    updateCell("text-align", "left", true);
+  }
+});
+
+$(".icon-align-center").click(function () {
+  if (!$(this).hasClass("selected")) {
+    updateCell("text-align", "center", false);
+  }
+});
+
+$(".icon-align-right").click(function () {
+  if (!$(this).hasClass("selected")) {
+    updateCell("text-align", "right", false);
+  }
+});
+
+$(function () {
+  $("input[type=color]").change(function (e) {
+    let classNam = e.target.nextElementSibling;
+    let className = classNam.getAttribute("class").split(" ")[1];
+    $("." + className).css({ color: e.target.value });
+  });
 });
